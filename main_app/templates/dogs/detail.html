@@ -62,4 +62,43 @@
   M.FormSelect.init(selectEl);
 </script>
 
+<hr>
+<div class="row">
+    <h3>{{ dog.name }}'s Toys</h3>
+    {% if dog.toys.count %}
+      {% for toy in dog.toys.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+               <span>{{ toy.color }}</span> {{ toy.name }}
+            </span>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>No Toys Yet</h5>
+    {% endif %}
+  </div>
+
+  <h3>Available Toys</h3>
+  {% if toys.count %}
+    {% for toy in toys.all %}
+    <div class="card-content">
+      <span class="card-title">
+         <span>{{ toy.color }}</span> {{ toy.name }}
+      </span>
+    </div>
+    <div class="card-action">
+      <form action="{% url 'assoc_toy' dog.id toy.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn">Add Toy</button>
+      </form>
+    </div>
+ </div>
+ {% endfor %}
+ {% else %}
+ <h4>{{dog.name}} already has all the toys</h4>
+ {% endif %}
+
+</div>
+
 {% endblock %}
