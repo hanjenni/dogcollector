@@ -28,7 +28,7 @@ def dogs_detail(request, dog_id):
         'feeding_form': feeding_form,
         'toys': toys_dog_doesnt_have
         })
-        
+
 def assoc_toy(request, dog_id, toy_id):
     Dog.objects.get(id=dog_id).toys.add(toy_id)
     return redirect('detail', dog_id)
@@ -53,8 +53,6 @@ class DogUpdate(UpdateView):
 class DogDelete(DeleteView):
     model = Dog
     success_url= '/dogs/'
-
-
 
 class ToyList(ListView):
     model = Toy
